@@ -107,10 +107,58 @@ var list_union = ['1', 2, 3];
 var generic = ['q', 'a', 'z'];
 // 用 any 表示数组中允许出现任意类型
 var any = ['xx', 1, { obj: 'obj' }];
+var num_interface = [1, 2, 3, 4, 5];
 console.log('Array', {
     list,
     generic,
     list_union,
-    any
+    any,
+    num_interface
 });
+//# sourceMappingURL=array.js.map
+
+function sum(x, y) {
+    return x + y;
+}
+var mySum = function (x, y) {
+    return x + y;
+};
+var mySearch;
+mySearch = function (source, subString) {
+    return source.search(subString) !== -1;
+};
+// 可选参数后面不允许再出现必须参数
+function buildName(firstName, lastName) {
+    if (firstName === void 0) {
+        firstName = 'first';
+    }
+    return lastName ? firstName + " " + lastName : firstName;
+}
+// 剩余参数
+function push(array) {
+    var items = [];
+    for (var _i = 1; _i < arguments.length; _i++) {
+        items[_i - 1] = arguments[_i];
+    }
+    items.forEach(function (item) {
+        array.push(item);
+    });
+}
+function reverse(x) {
+    return typeof x === 'number' ? Number(x.toString().split('').reverse().join('')) : typeof x === 'string' ? x.split('').reverse().join('') : '';
+}
+
+var arr = [];
+push(arr, 1, 2, 3);
+console.log('function:', {
+    sum: sum(1, 2),
+    mySum: mySum(2, 3),
+    mySearch: mySearch('hello', 'e'),
+    firs_last_name: buildName('first', 'last'),
+    onlyName: buildName(undefined, 'only'),
+    arr_push: arr,
+    reverse_num: reverse(12345),
+    reverse_string: reverse('hello world')
+});
+//# sourceMappingURL=main.js.map
 //# sourceMappingURL=bundle.es.js.map

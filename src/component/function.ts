@@ -38,6 +38,9 @@ function reverse(x: number | string): number | string {
    : typeof x === 'string' ? x.split('').reverse().join('') : ''
 }
 
+console.log('function:', {
+  reverse_num: reverse(12345)
+});
 
 export {
   sum,

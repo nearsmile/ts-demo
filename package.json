@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "rollup -c -w",
     "start": "rollup -c -w",
-    "build": "rollup -c -w"
+    "build": "rollup -c -w",
+    "cjs": "node ./dist/bundle.cjs.js"
   },
   "repository": {
     "type": "git",
@@ -30,6 +31,12 @@
     "rollup-plugin-node-resolve": "^3.0.0",
     "rollup-plugin-typescript": "^0.8.1",
     "rollup-plugin-visualizer": "^0.3.1",
-    "rollup-watch": "^4.3.1"
+    "rollup-watch": "^4.3.1",
+    "tslint": "^5.8.0"
+  },
+  "dependencies": {
+    "@types/jquery": "^3.2.16",
+    "@types/lodash": "^4.14.85",
+    "@types/node": "^8.0.53"
   }
 }

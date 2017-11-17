@@ -12,9 +12,16 @@ let generic: Array<string> = ['q', 'a', 'z'];
 // 用 any 表示数组中允许出现任意类型
 const any: any[] = ['xx', 1, { obj: 'obj' }]
 
+interface NumberArray {
+  [index: number]: number;
+}
+
+let num_interface: NumberArray = [1, 2, 3, 4, 5];
+
 console.log('Array', {
   list,
   generic,
   list_union,
-  any
+  any,
+  num_interface
 });

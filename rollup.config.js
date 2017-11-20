@@ -18,11 +18,11 @@ export default {
   // format: 'cjs',
   // dest: './dist/bundle.cjs.js'
   targets: [
-    { dest: './dist/bundle.umd.js', format: 'umd' },
-    { dest: './dist/bundle.iife.js', format: 'iife' },
-    { dest: './dist/bundle.cjs.js', format: 'cjs' },
-    { dest: './dist/bundle.amd.js', format: 'amd' },
-    { dest: './dist/bundle.es.js', format: 'es' }
+    // { dest: './dist/bundle.umd.js', format: 'umd' },
+    // { dest: './dist/bundle.iife.js', format: 'iife' },
+    { dest: './dist/bundle.cjs.js', format: 'cjs' }
+    // { dest: './dist/bundle.amd.js', format: 'amd' },
+    // { dest: './dist/bundle.es.js', format: 'es' }
   ],
   sourceMap: true
 }

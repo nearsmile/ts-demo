@@ -1,5 +1,11 @@
 'use strict';
 
+function __extends(d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+}
+
 /* Boolean */
 var isBoolean = Boolean(1);
 console.log('Boolean:', {
@@ -230,4 +236,212 @@ console.log('enum:', {
     Fri: Days[5],
     Sat: Days['Sat']
 });
+var Color;
+(function (Color) {
+    Color[Color["Red"] = 0] = "Red";
+    Color[Color["Green"] = 1] = "Green";
+    Color[Color["Blue"] = 'blue'.length] = "Blue";
+})(Color || (Color = {})); // "blue".length 就是一个计算所得项
+var Directions;
+(function (Directions) {
+    Directions[Directions["Up"] = 0] = "Up";
+    Directions[Directions["Down"] = 1] = "Down";
+    Directions[Directions["Left"] = 2] = "Left";
+    Directions[Directions["Right"] = 3] = "Right";
+})(Directions || (Directions = {}));
+// declare const enum Direction { Up, Down, Left, Right }
+var directions = [Directions.Up, Directions.Down, Directions.Left, Directions.Right];
+// let direction = [Direction.Up, Direction.Down, Direction.Left, Direction.Right]
+console.log('enum2:', {
+    color: Color['Blue'],
+    directions
+});
+//# sourceMappingURL=enum.js.map
+
+/* ES6 中类的用法 */
+var Animal = function () {
+    function Animal(name) {
+        this.name = name;
+    }
+    Animal.isAnimal = function (a) {
+        return a instanceof Animal;
+    };
+    Object.defineProperty(Animal.prototype, "name", {
+        get: function () {
+            return 'default Jack';
+        },
+        set: function (value) {
+            console.log("ES6-setter: " + value);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Animal.prototype.say = function () {
+        return "answer: " + this.name;
+    };
+    Animal.num = 42;
+    return Animal;
+}();
+var Cat = function (_super) {
+    __extends(Cat, _super);
+    function Cat(name) {
+        _super.call(this, name);
+    }
+    Cat.prototype.say = function () {
+        return "Meow " + _super.prototype.say.call(this);
+    };
+    return Cat;
+}(Animal);
+var a = new Animal('Hello');
+var c = new Cat('Tom');
+var k = new Animal('Kitty');
+k.name = 'kitty';
+// console.log(`%cclass_ES6:${a.say()}`, 'color: red');
+console.log("class_ES6:", {
+    es6: a.say(),
+    cat: c.say(),
+    aSet: k.name,
+    static: Animal.isAnimal(k)
+});
+//# sourceMappingURL=class_es6.js.map
+
+var Animals = function () {
+    // protected name;
+    function Animals(name) {
+        this.name = name;
+    }
+    return Animals;
+}();
+var a$1 = new Animals('Jack');
+console.log('a.name', a$1.name);
+a$1.name = 'Tom';
+console.log('a.name2:', a$1.name);
+var Cat$1 = function (_super) {
+    __extends(Cat, _super);
+    function Cat(name) {
+        _super.call(this, name);
+        console.log('Cat.name', this.name);
+    }
+    return Cat;
+}(Animals);
+var cat = new Animals('Cat');
+console.log('cat:', cat.name);
+var Title = function () {
+    function Title(name) {
+        this.name = name;
+    }
+    return Title;
+}();
+var SubTitle = function (_super) {
+    __extends(SubTitle, _super);
+    function SubTitle() {
+        _super.apply(this, arguments);
+    }
+    SubTitle.prototype.header = function () {
+        console.log("this is header " + this.name);
+    };
+    return SubTitle;
+}(Title);
+// let title = new Title('title name') // [ts] 无法创建抽象类“Title”的实例。
+var title = new SubTitle('subTitle');
+console.log('subTitle:', title.name);
+//# sourceMappingURL=class.js.map
+
+var Door = function () {
+    function Door() {}
+    return Door;
+}();
+var SecurityDoor = function (_super) {
+    __extends(SecurityDoor, _super);
+    function SecurityDoor() {
+        _super.apply(this, arguments);
+    }
+    SecurityDoor.prototype.alerts = function () {
+        console.log('SecurityDoor alert');
+    };
+    return SecurityDoor;
+}(Door);
+var point = { x: 1, y: 2, z: 3 };
+console.log('class_interface', {
+    point
+});
+function getCounter() {
+    var counter = function (start) {};
+    counter.interval = 123;
+    counter.reset = function () {};
+    return counter;
+}
+var c$1 = getCounter();
+console.log('class_interface', {
+    c10: c$1(10),
+    c_reset: c$1.reset(),
+    c_interval: c$1.interval = 5.0
+});
+//# sourceMappingURL=class_interface.js.map
+
+// 实现一个函数 createArray，
+// 它可以创建一个指定长度的数组，同时将每一项都填充一个默认值
+// Array<any> 允许数组的每一项都为任意类型。但是我们预期的是，数组中每一项都应该是输入的 value 的类型
+// 在函数名后添加了 <T>，其中 T 用来指代任意输入的类型，在后面的输入 value: T 和输出 Array<T> 中即可使用了
+console.info('******************** generics *************************');
+// function createArray (length: number, value: any): Array<any> {
+function createArray(length, value) {
+    var result = [];
+    for (var i = 0; i < length; i++) {
+        result[i] = value;
+    }
+    return result;
+}
+console.log('generics:', {
+    createArray: createArray(3, 'x')
+});
+// 定义泛型的时候，可以一次定义多个类型参数
+function swap(tuple) {
+    return [tuple[1], tuple[0]];
+}
+console.log('genericsMulti', {
+    swap: swap([7, 'seven'])
+});
+function logId(arg) {
+    console.log('generics-logId:', arg.length); // 报错：[ts] 类型“T”上不存在属性“length”。
+    return arg;
+}
+logId('7');
+// 使用了两个类型参数，其中要求 T 继承 U，这样就保证了 U 上不会出现 T 中不存在的字段
+function copyFields(target, source) {
+    for (var id in source) {
+        target[id] = source[id];
+    }
+    return target;
+}
+var x = { a: 1, b: 2, c: 3, d: 4 };
+console.log('generics-copy:', {
+    copyFields: copyFields(x, { b: 10, d: 20 })
+});
+var createArr;
+createArr = function (length, value) {
+    var result = [];
+    for (var i = 0; i < length; i++) {
+        result[i] = value;
+    }
+    return result;
+};
+console.log('generic-arr', {
+    createArr: createArr(5, 'x')
+});
+var GenericNumber = function () {
+    function GenericNumber() {}
+    return GenericNumber;
+}();
+var numTotal = new GenericNumber();
+numTotal.zeroValue = 0;
+numTotal.add = function (x, y) {
+    return x + y;
+};
+console.log('numTotal', {
+    zero: numTotal.zeroValue,
+    add: numTotal.add(1, 2)
+});
+console.info('******************************************************');
+//# sourceMappingURL=generics.js.map
 //# sourceMappingURL=bundle.cjs.js.map

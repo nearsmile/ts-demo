@@ -17,3 +17,15 @@ console.log('enum:', {
   Fri: Days[5],
   Sat: Days['Sat']
 })
+
+enum Color { Red, Green, Blue = 'blue'.length } // "blue".length 就是一个计算所得项
+
+const enum Directions { Up, Down, Left, Right }
+// declare const enum Direction { Up, Down, Left, Right }
+let directions = [Directions.Up, Directions.Down, Directions.Left, Directions.Right]
+// let direction = [Direction.Up, Direction.Down, Direction.Left, Direction.Right]
+console.log('enum2:', {
+  color: Color['Blue'],
+  directions,
+  // direction
+})
